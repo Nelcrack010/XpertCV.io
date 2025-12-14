@@ -204,14 +204,77 @@ header {
 }
 
 /* =========================================
-   5. RESPONSIVE (Móvil)
+   9. RESPONSIVE (MÓVIL Y TABLET)
    ========================================= */
+
+/* Estilos del Botón Hamburguesa (Oculto en PC) */
+.menu-toggle {
+    display: none; /* En PC no se ve */
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--accent);
+    margin: 4px 0;
+    transition: 0.4s;
+    border-radius: 2px;
+}
+
+/* MEDIDA PARA CELULARES (Menos de 768px) */
 @media (max-width: 768px) {
+    
+    /* 1. Ajustes del Navbar */
     .navbar { height: 70px; }
-    .nav-links { display: none; } /* Menú oculto en móvil */
+    
+    .menu-toggle {
+        display: flex; /* Ahora sí se ve el botón */
+        z-index: 1001; /* Por encima de todo */
+    }
+
+    /* El menú desplegable */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%; /* Oculto a la derecha */
+        width: 70%;   /* Ocupa el 70% de la pantalla */
+        height: 100vh;
+        background-color: rgba(10, 25, 47, 0.98); /* Fondo casi opaco */
+        backdrop-filter: blur(10px);
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    /* Clase que agrega JS para mostrar el menú */
+    .nav-links.active {
+        right: 0; /* Entra en la pantalla */
+    }
+
+    .nav-links li { margin: 20px 0; }
+    .nav-links a { font-size: 1.2rem; }
+
+    /* 2. Ajustes de Texto Gigante (Hero) */
     .big-name { font-size: 3rem; }
-    .cta-buttons { flex-direction: column; }
-    .btn-contact, .btn-outline { width: 100%; text-align: center; box-sizing: border-box; }
-    /* Ajustes tarjeta contacto */
-    .contact-card { padding: 1.5rem; }
+    .typewriter p { font-size: 1rem; }
+    .bio-text { font-size: 1rem; padding: 0 10px; }
+
+    /* 3. Ajustes de Botones */
+    .cta-buttons { flex-direction: column; width: 100%; }
+    .btn-contact, .btn-outline { width: 100%; box-sizing: border-box; text-align: center; }
+
+    /* 4. Ajustes de Contacto */
+    .contact-center-screen { padding-top: 80px; align-items: flex-start; }
+    .contact-card { padding: 1.5rem; width: 90%; margin: 0 auto; }
+    .contact-title { font-size: 1.8rem; }
+    
+    /* 5. Animación del botón hamburguesa al abrirse (Se vuelve una X) */
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
 }
